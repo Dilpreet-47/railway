@@ -18,7 +18,7 @@ const App = () => {
 
     try {
       const response = await fetch(
-        `https://rappid.in/apis/train.php?train_no=${trainNumber}`
+       `/api/train.php?train_no=${trainNumber}`
       );
 
       if (!response.ok) {
@@ -43,8 +43,8 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6">
+    <div className="h-screen w-screen flex flex-col bg-gray-100 p-6">
+      <div className="w-full max-w-md mx-auto bg-white rounded-2xl shadow-lg p-6 flex-shrink-0">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">
           🚆 Train Info Finder
         </h1>
@@ -66,22 +66,20 @@ const App = () => {
           </button>
         </div>
 
-        {/* Loading spinner */}
         {loading && <p className="text-blue-500 text-center">Loading...</p>}
-
-        {/* Error message */}
         {error && <p className="text-red-500 text-center">{error}</p>}
-
-        {/* Train data */}
-        {trainData && (
-          <div className="mt-4 p-4 bg-gray-50 border rounded-lg overflow-x-auto">
-            <pre className="text-sm text-gray-700">
-              {JSON.stringify(trainData, null, 2)}
-            </pre>
-          </div>
-        )}
       </div>
+
+      {/* JSON Result Box */}
+      {trainData && (
+        <div className="flex-1 mt-4 p-4 bg-white border rounded-lg overflow-auto shadow-lg">
+          <pre className="text-sm text-gray-700">
+            {JSON.stringify(trainData, null, 2)}
+          </pre>
+        </div>
+      )}
     </div>
+
   );
 };
 
